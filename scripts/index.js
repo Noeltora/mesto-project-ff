@@ -25,7 +25,6 @@ function addCard(cardData, deleteFn) {
   return cardElement;
 }
 
-
 // @todo: Функция удаления карточки
 
 function deleteCard(cardElement) {
