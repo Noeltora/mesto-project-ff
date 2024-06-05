@@ -10,8 +10,8 @@ export function addCard(cardData, deleteFn, likeFn, fullCardImage) {
 
   const cardTargetImage = cardElement.querySelector(".card__image");
 
-  cardElement.querySelector(".card__image").src = cardData.link;
-  cardElement.querySelector(".card__image").alt = cardData.name;
+  cardTargetImage.src = cardData.link;
+  cardTargetImage.alt = cardData.name;
   cardElement.querySelector(".card__title").textContent = cardData.name;
 
   deleteButton.addEventListener("click", () => {
@@ -30,7 +30,6 @@ export function addCard(cardData, deleteFn, likeFn, fullCardImage) {
 }
 
 // Функция удаления карточки
-
 export function deleteCard(cardElement) {
   cardElement.remove();
 }
@@ -38,40 +37,4 @@ export function deleteCard(cardElement) {
 // Функция лайка карточки
 export function likeCard(likeBtn) {
   likeBtn.classList.toggle("card__like-button_is-active");
-}
-
-// Функция создания своей карточки
-export function addNewCard(
-  placeValue,
-  urlValue,
-  deleteFn,
-  likeFn,
-  fullCardImage
-) {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate
-    .querySelector(".places__item")
-    .cloneNode(true);
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  const likeForNewCardButton = cardElement.querySelector(".card__like-button");
-
-  const cardTargetImage = cardElement.querySelector(".card__image");
-
-  cardElement.querySelector(".card__image").src = urlValue;
-  cardElement.querySelector(".card__image").alt = placeValue;
-  cardElement.querySelector(".card__title").textContent = placeValue;
-
-  deleteButton.addEventListener("click", () => {
-    deleteFn(cardElement);
-  });
-
-  likeForNewCardButton.addEventListener("click", () => {
-    likeFn(likeForNewCardButton);
-  });
-
-  cardTargetImage.addEventListener("click", () => {
-    fullCardImage(placeValue, urlValue);
-  });
-
-  return cardElement;
 }
