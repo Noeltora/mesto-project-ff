@@ -34,6 +34,8 @@ initialCards.forEach((card) => {
 
 // слушатель открытия попапа
 addButtonPopup.addEventListener("click", function () {
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
   openModal(popupEdit);
 });
 
@@ -67,7 +69,7 @@ const jobInput = formElementForProfile.querySelector(
   ".popup__input_type_description"
 );
 const nameProfile = document.querySelector(".profile__title");
-const jobProfile = document.querySelector(".profile__description"); // Воспользуйтесь инструментом .querySelector()
+const jobProfile = document.querySelector(".profile__description");
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -77,7 +79,6 @@ function handleFormSubmitForProfile(evt) {
   // О том, как это делать, расскажем позже.
 
   // Выберите элементы, куда должны быть вставлены значения полей
-
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
   closeModal(popupEdit);
