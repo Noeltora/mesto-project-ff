@@ -2,11 +2,11 @@ import { deleteInitialCards, toggleLikeMark } from "./api";
 import { closeModal, openModal } from "./modal";
 
 const popupDeleteCard = document.querySelector(".popup_type_delete-card");
-let deletedCard = false;
-let deletedCardId = false;
+let deletedCard = null;
+let deletedCardId = null;
 
 // Функция создания карточки
-export function addCard(cardData, deleteFn, likeFn, fullCardImage, userId) {
+export function createCard(cardData, deleteFn, likeFn, fullCardImage, userId) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
     .querySelector(".places__item")

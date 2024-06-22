@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import {
-  addCard,
+  createCard,
   deleteCard,
   likeCard,
   agreeWithDeleteCard,
@@ -71,9 +71,8 @@ function openCardImage(cardName, cardLink) {
 
 // функция ожидания загрузки
 function renderLoading(isLoading) {
-  const openPopup = document.querySelector(".popup_is-opened");
-  if (openPopup) {
-    const loadButton = openPopup.querySelector(".popup__button");
+  const loadButton = document.querySelector(".popup_is-opened .popup__button");
+  if (loadButton) {
     loadButton.textContent = isLoading ? "Сохранение..." : "Сохранить";
   }
 }
@@ -81,7 +80,13 @@ function renderLoading(isLoading) {
 // функция вывода карточек
 function presentCards(cards, userId) {
   cards.forEach((card) => {
-    const newCard = addCard(card, deleteCard, likeCard, openCardImage, userId);
+    const newCard = createCard(
+      card,
+      deleteCard,
+      likeCard,
+      openCardImage,
+      userId
+    );
     cardsContainer.append(newCard);
   });
 }
@@ -112,8 +117,7 @@ popups.forEach(function (popup) {
 
 // слушатель открытия карточки
 addButtonContent.addEventListener("click", function () {
-  newCardNameinput.value = "";
-  newCardUrlInput.value = "";
+  formNewCardElement.reset();
   clearValidation(popupNewCard, validationConfig);
   openModal(popupNewCard);
 });
@@ -178,7 +182,7 @@ function handleFormSubmitPlace(evt) {
 
   postNewCard(cardData.name, cardData.link)
     .then((newCard) => {
-      const result = addCard(
+      const result = createCard(
         newCard,
         deleteCard,
         likeCard,
@@ -186,8 +190,7 @@ function handleFormSubmitPlace(evt) {
         newCard.owner._id
       );
       cardsContainer.prepend(result);
-      newCardNameinput.value = "";
-      newCardUrlInput.value = "";
+      formNewCardElement.reset();
     })
     .catch((err) => {
       console.log(err);

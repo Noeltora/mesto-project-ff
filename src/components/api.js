@@ -6,7 +6,7 @@ const config = {
   },
 };
 
-function checkRequest(res) {
+function checkResponse(res) {
   if (res.ok) {
     return res.json();
   } else {
@@ -18,14 +18,14 @@ export function getUserInfo() {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "GET",
     headers: config.headers,
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 export function getInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
     method: "GET",
     headers: config.headers,
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 export function patchUserInfo(name, about) {
@@ -36,7 +36,7 @@ export function patchUserInfo(name, about) {
       name: name,
       about: about,
     }),
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 export function postNewCard(name, link) {
@@ -47,28 +47,28 @@ export function postNewCard(name, link) {
       name: name,
       link: link,
     }),
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 export function deleteInitialCards(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 function putLikeOnCard(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 function deleteLikeOnCard(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
 
 export function toggleLikeMark(cardId, isLiked) {
@@ -82,5 +82,5 @@ export function patchUserAvatar(link) {
     body: JSON.stringify({
       avatar: link,
     }),
-  }).then(checkRequest);
+  }).then(checkResponse);
 }
